@@ -24,6 +24,10 @@ app.post('/api/login', (request, response, next) => {
     response.json({ token: 'token12345' })
 })
 
+app.get('/research', (request, response, next) => {
+    response.json({ status: true, message: 'Ini research feature api baru!' })
+})
+
 app.listen(port, () => {
     console.log(`API Simple Login running on port ${port}`)
 })
