@@ -3,12 +3,9 @@ const cors = require('cors')
 const app = express()
 const port = 5000
 
-// allow semua origin : '*'
 app.use(cors())
-app.use(express.json()) // parsing semua request ke dalam json
+app.use(express.json())
 
-// request -> '/' -> middleware -> inside function route
-// request -> '/' -> inside function route
 app.get('/', (request, response, next) => {
     response.json({ status: true, message: 'Simple Api Login!' })
 })
