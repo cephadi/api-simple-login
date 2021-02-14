@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const app = express()
 const port = 5000
+const middleware = require('./middleware')
 
 app.use(cors())
 app.use(express.json())
@@ -18,13 +19,13 @@ app.get('/:name', (request, response, next) => {
 
 app.post('/api/login', (request, response, next) => {
     const { username, password } = request.body
-    if (username != 'user123' && password != 'user123' ) {
-        response.json({ status: false, message: 'Login Gagal!' })
+    if (username == 'user123' && password == 'user123' ) {
+        response.json({ token: 'token12345' })
     } 
-    response.json({ token: 'token12345' })
+    response.json({ status: false, message: 'Login Gagal!' })
 })
 
-app.get('/research', (request, response, next) => {
+app.get('/protected/research', middleware.checkToken, (request, response, next) => {
     response.json({ status: true, message: 'Ini research feature api baru!' })
 })
 
